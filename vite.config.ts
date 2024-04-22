@@ -1,22 +1,28 @@
-import { defineConfig } from "vite"
+import { defineConfig, loadEnv } from "vite"
 import path from "path"
 import react from "@vitejs/plugin-react"
 import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
 
-const port = import.meta?.env?.PORT || 7906;
+export default ({ mode }: { mode: string }) => {
+  // preload env variables in process.env
+  process.env = {...process.env, ...loadEnv(mode, process.cwd())};
 
-export default defineConfig({
-  plugins: [
-    react(),
-    TanStackRouterVite(),
-  ],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+  const envPort = process.env.VITE_PORT
+  const port = envPort !== undefined ? parseInt(envPort) : 7906;
+
+  return defineConfig({
+    plugins: [
+      react(),
+      TanStackRouterVite(),
+    ],
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
     },
-  },
-  preview: {
-    port,
-    host: true,
-  },
-})
+    preview: {
+      port,
+      host: true,
+    },
+  });
+}
