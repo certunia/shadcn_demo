@@ -17,5 +17,6 @@ export default defineConfig({
   },
   preview: {
     port,
+    host: true,
   },
 })
