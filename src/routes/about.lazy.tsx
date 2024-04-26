@@ -1,9 +1,14 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
+import ContentWrapper from '../components/content-wrapper'
 
 export const Route = createLazyFileRoute('/about')({
-  component: About,
+  component: Index,
 })
 
-function About() {
-  return <div className="p-2">Hello from About!</div>
+function Index() {
+  return (
+    <ContentWrapper title="Data table!!!">
+      
+    </ContentWrapper>
+  )
 }

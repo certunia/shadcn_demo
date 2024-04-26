@@ -1,4 +1,5 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
+import ContentWrapper from '../components/content-wrapper'
 
 export const Route = createLazyFileRoute('/')({
   component: Index,
@@ -6,8 +7,9 @@ export const Route = createLazyFileRoute('/')({
 
 function Index() {
   return (
-    <div className="p-2">
-      <h3>Welcome Home!</h3>
-    </div>
+    <ContentWrapper title="Home">
+      Here is some demo project i've built using React, Typescript, and TailwindCSS.
+      Check out the other page with a data table. 
+    </ContentWrapper>
   )
 }
