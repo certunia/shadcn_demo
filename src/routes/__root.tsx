@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button"
 export const Route = createRootRoute({
   component: () => (
     <>
-      <div className="flex gap-2 h-full">
+      <div className="flex gap-2 h-dvh">
         <div className='flex flex-col p-4 border-r'>
           <div className='p-4 border-b'>
             Logo here
@@ -29,7 +29,7 @@ export const Route = createRootRoute({
                 </NavigationMenuItem>
                 <NavigationMenuItem className='w-full'>
                   <Button size='block' asChild variant="ghost">
-                    <Link to="/about">Data Table</Link>
+                    <Link to="/data-table">Data Table</Link>
                   </Button>
                 </NavigationMenuItem>
               </NavigationMenuList>
