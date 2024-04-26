@@ -16,22 +16,20 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const DataTableLazyImport = createFileRoute('/data-table')()
 const IndexLazyImport = createFileRoute('/')()
-const DataTableIndexLazyImport = createFileRoute('/data-table/')()
 
 // Create/Update Routes
+
+const DataTableLazyRoute = DataTableLazyImport.update({
+  path: '/data-table',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/data-table.lazy').then((d) => d.Route))
 
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
-
-const DataTableIndexLazyRoute = DataTableIndexLazyImport.update({
-  path: '/data-table/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/data-table/index.lazy').then((d) => d.Route),
-)
 
 // Populate the FileRoutesByPath interface
 
@@ -41,8 +39,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/data-table/': {
-      preLoaderRoute: typeof DataTableIndexLazyImport
+    '/data-table': {
+      preLoaderRoute: typeof DataTableLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -52,7 +50,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
-  DataTableIndexLazyRoute,
+  DataTableLazyRoute,
 ])
 
 /* prettier-ignore-end */
