@@ -8,7 +8,7 @@ export const Route = createLazyFileRoute('/about')({
 function Index() {
   return (
     <ContentWrapper title="Data table!!!">
-      
+      <div>asdf</div>
     </ContentWrapper>
   )
 }

@@ -37,15 +37,11 @@ export const Route = createRootRoute({
           </ScrollArea>
         </div>
         <div className='content p-4 w-full'>
-          <Outlet setPageTitle={setPageTitle}/>
+          <Outlet/>
         </div>
       </div>
       {/* <TanStackRouterDevtools /> */}
     </>
   ),
 })
-
-function setPageTitle(title: string) {
-  document.title = title
-}
 
